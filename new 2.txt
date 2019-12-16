@@ -1,0 +1,18 @@
+@IsMember(@Text(@Today);@Text(NotificationDateTotal)) |
+				@IsMember(@Text(@Today);@Text(@Adjust(NotificationDateTotal;0;0;-1;0;0;0)))  |
+				@IsMember(@Text(@Today);@Text(@Adjust(NotificationDateTotal;0;0;1;0;0;0));
+				@IsMember(@Text(@Today);@Text(ReminderDateTotal)) |
+				@IsMember(@Text(@Today);@Text(@Adjust(ReminderDateTotal;0;0;-1;0;0;0)))  |
+				@IsMember(@Text(@Today);@Text(@Adjust(ReminderDateTotal;0;0;1;0;0;0))
+				
+				
+				
+				
+				
+				@If(TotalNoti>0;Repeat +"^"+ @Right("0" + @Text(@Day(NotificationDateTotal));2) + "/" + @Right("0" + @Text(@Month(NotificationDateTotal));2)  + "/" + @Text(@Year(NotificationDateTotal));Repeat +"^"+ @Right("0" + @Text(@Day(ReminderDateTotal));2) + "/" + @Right("0" + @Text(@Month(ReminderDateTotal));2)  + "/" + @Text(@Year(ReminderDateTotal)));
+				
+				
+SELECT ((Form = "MainReminder") & (StatusMarkComplete !="Y")
+& (@If(TotalNoti > 0;@IsMember(@Text(@Today);@Text(NotificationDateTotal))|@IsMember(@Text(@Today);@Text(@Adjust(NotificationDateTotal;0;0;-1;0;0;0)))|@IsMember(@Text(@Today);@Text(@Adjust(NotificationDateTotal;0;0;1;0;0;0)));@IsMember(@Text(@Today);@Text(ReminderDateTotal))|@IsMember(@Text(@Today);@Text(@Adjust(ReminderDateTotal;0;0;-1;0;0;0)))|@IsMember(@Text(@Today);@Text(@Adjust(ReminderDateTotal;0;0;1;0;0;0))))
+)
+)

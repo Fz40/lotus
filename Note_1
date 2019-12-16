@@ -1,0 +1,201 @@
+SELECT ((Form = "MainReminder") & (StatusMarkComplete !="Y")
+&(@IsMember(@Text(@Today);@Text(NotificationDateTotal))
+)
+)
+
+SELECT ((Form = "MainReminder") & (StatusMarkComplete !="Y")
+&(@IsMember(@Text(@Today);@Text(NotificationDateTotal)=1 )|@IsMember(@Text(@Adjust(@Today;0;0;-1;0;0;0));@Text(NotificationDateTotal))=1|@IsMember(@Text(@Adjust(@Today;0;0;1;0;0;0));@Text(NotificationDateTotal))=1)
+)
+)
+
+
+SELECT (
+	(Form = "MainReminder") 
+	& (StatusMarkComplete !="Y") 
+	& !((@IsMember(@Text(@Today);@Text(NotificationDateTotal)))
+	|(@IsMember(@Text(@Adjust(@Today;0;0;-1;0;0;0));@Text(NotificationDateTotal))=1)
+	|(@IsMember(@Text(@Adjust(@Today;0;0;1;0;0;0));@Text(NotificationDateTotal))=1)))
+	
+
+
+@If(TotalNoti  = 0 ; @SetField( NotificationDateTotal ; ReminderDateTotal );"");
+@If(TotalNoti =  0  ; @SetField( ReminderDateTotal ;Null) ;"");
+SELECT @All
+
+	
+	%REM
+		strQuery = {SELECT (
+	(Form = "MainReminder") 
+	& (StatusMarkComplete !="Y") 
+	&(@IsMember(@Text(@Today);@Text(NotificationDateTotal)))
+	|(@IsMember(@Text(@Adjust(@Today;0;0;-1;0;0;0));@Text(NotificationDateTotal))=1)
+	|(@IsMember(@Text(@Adjust(@Today;0;0;1;0;0;0));@Text(NotificationDateTotal))=1))}
+	%END REM
+
+
+	%REM
+		ForAll NotificationDate In doc.NotificationDateTotal
+			If NotificationDate = BeforeReminder Then
+				doc.Alert_Reminder = "B"
+				doc.DateAlert = cdat(NotificationDate)
+				Call doc.Save(True,True)
+			End If
+			If NotificationDate = Reminder Then
+				doc.Alert_Reminder = "T"
+				doc.DateAlert = cdat(NotificationDate)
+				Call doc.Save(True,True)
+			End If
+			If NotificationDate = AfterReminder Then
+				doc.Alert_Reminder = "A"
+				doc.DateAlert = Cdat(NotificationDate)
+				Call doc.Save(True,True)
+			End If
+					
+		End ForAll
+	%END REM
+	
+	CB504863756TH
+	
+	&!(@Contains(Chk_Noti ;"Y"))
+	
+	eval = Evaluate({@SetField("Noti_1" ;"");@SetField("Opt_1" ;"เติอนก่อนครบกำหนด");
+@SetField("Noti_2" ;"");@SetField("Opt_2" ;"เติอนก่อนครบกำหนด");
+@SetField("Noti_3" ;"");@SetField("Opt_3" ;"เติอนก่อนครบกำหนด");
+@SetField("Noti_4" ;"");@SetField("Opt_4" ;"เติอนก่อนครบกำหนด");
+@SetField("Noti_5" ;"");@SetField("Opt_5" ;"เติอนก่อนครบกำหนด");}, curdoc)
+
+	If curdoc.Chk_Noti(0) <> "" Then
+		
+		eval = Evaluate({@SetField("TotalNoti" ;"1")}, curdoc)
+	Else
+		
+		eval = Evaluate({@SetField("TotalNoti" ;"0")}, curdoc)
+	End If
+	
+	
+	@If(Chk_Noti != Comp_ChkNoti ;
+	@Do(@SetField("TotalNoti" ; @If(Chk_Noti = "";0;1));
+				@SetField("Noti_1" ;"");
+				@SetField("Opt_1" ;"");
+				@SetField("Noti_2" ;"");
+				@SetField("Opt_2" ;"");
+				@SetField("Noti_3" ;"");
+				@SetField("Opt_3" ;"");
+				@SetField("Noti_4" ;"");
+				@SetField("Opt_4" ;"");
+				@SetField("Noti_5" ;"");
+				@SetField("Opt_5" ;"")
+			)
+	;"");
+	Chk_Noti 
+
+
+
+@If(Chk_Noti != Comp_ChkNoti;
+		@Do(@SetField("TotalNoti" ;@If(@Contains(Chk_Noti;"Y");TotalNoti + 1;Chk_Noti = "";0;0));
+				@SetField("Noti_1" ;"");
+				@SetField("Opt_1" ;"");
+				@SetField("Noti_2" ;"");
+				@SetField("Opt_2" ;"");
+				@SetField("Noti_3" ;"");
+				@SetField("Opt_3" ;"");
+				@SetField("Noti_4" ;"");
+				@SetField("Opt_4" ;"");
+				@SetField("Noti_5" ;"");
+				@SetField("Opt_5" ;"")
+		)
+;"");
+Chk_Noti
+
+@Trim(@Name([CN];Creater):Request:Optional:PersonStopRemider) 
+FileName := @AttachmentNames;
+@If(FileName != "";FileName;"")
+
+@Replace(WeeklyType;"1" : "2" : "3" : "4" : "5" : "6" : "7" ;
+"อาทิตย์" : "จันทร์" : "อังคาร" : "พุธ" : "พฤหัสบดี" : "ศุกร์" : "เสาร์" )
+
+Person ไม่รับเมล์ แต่ edit ได้ ปิดได้
+option รับเมล์  edit ได้ ปิดได้
+
+
+valWeeklyType = Replace(Replace(Replace(Replace(Replace(Replace(Replace(valWeeklyType,"1","อาทิตย์"),"2","จันทร์"),"3","อังคาร"),"4","พุธ"),"2","พฤหัสบดี"),"2","ศุกร์"),"2","เสาร์")
+
+EndDate
+CheckNeverEnd
+WeeklyType
+MonthlyType
+YearlyType
+CustomDate
+
+
+
+
+
+
+
+
+@If(Repeat!= Comp_Repeat ;
+@If(Repeat ="OneDay";
+	@Do(@SetField("EndDate" ;"");
+	@SetField("CheckNeverEnd" ;"");
+	@SetField("WeeklyType" ;"");
+	@SetField("MonthlyType" ;"");
+	@SetField("YearlyType" ;"");
+	@SetField("CustomDate" ;"")
+	)
+;
+@If(Repeat ="Daily";
+	@Do(@SetField("WeeklyType" ;"");
+	@SetField("MonthlyType" ;"");
+	@SetField("YearlyType" ;"");
+	@SetField("CustomDate" ;"")
+	)
+;
+@If(Repeat ="Weekly";
+	@Do(@SetField("EndDate" ;"");
+	@SetField("CheckNeverEnd" ;"");
+	@SetField("MonthlyType" ;"");
+	@SetField("YearlyType" ;"");
+	@SetField("CustomDate" ;"")
+	)
+;
+@If(Repeat ="Monthy";
+	@Do(@SetField("EndDate" ;"");
+	@SetField("CheckNeverEnd" ;"");
+	@SetField("WeeklyType" ;"");
+	@SetField("YearlyType" ;"");
+	@SetField("CustomDate" ;"")
+	)
+;
+@If(Repeat ="Yearly";
+	@Do(@SetField("EndDate" ;"");
+	@SetField("CheckNeverEnd" ;"");
+	@SetField("WeeklyType" ;"");
+	@SetField("MonthlyType" ;"");
+	@SetField("CustomDate" ;"")
+	)
+;
+@If(Repeat ="Custom";
+	@Do(@SetField("EndDate" ;"");
+	@SetField("CheckNeverEnd" ;"");
+	@SetField("WeeklyType" ;"");
+	@SetField("MonthlyType" ;"");
+	@SetField("YearlyType" ;"")
+	
+	)
+;
+""
+))))))
+;"");
+Repeat
+
+SELECT (
+	(Form = "MainReminder")
+	&(StatusMarkComplete !="Y")
+    &(Repeat= "Daily":"Weekly":"Monthy")
+	&(@Today > StartsDate))
+
+
+
+
+	

@@ -1,0 +1,86 @@
+Sub ClearFieldMainFrom(curdoc As NotesDocument , Section As String) 
+
+        If Section = "EmployeeDetail_Full" then
+            curdoc.FindCompanyID =""
+            curdoc.FindCompany =""
+            curdoc.FindGroupID =""
+            curdoc.FindGroup =""
+            
+            curdoc.FindFieldID =""
+            curdoc.FindField =""
+            curdoc.FindDepartmentID =""
+            curdoc.FindDepartment =""
+            curdoc.FindSectionsID =""
+            curdoc.FindSections =""
+            curdoc.FindDivisionID =""
+            curdoc.FindDivision =""
+            curdoc.FindBranchID =""
+            curdoc.FindBranch =""
+            curdoc.FindLevelsID =""
+            curdoc.FindLevels =""
+            curdoc.FindPositionID =""
+            curdoc.FindPosition =""
+            curdoc.FindEmpID =""
+            curdoc.FindEmpFirstName =""
+            curdoc.FindEmpLastName =""
+
+        ElseIF Section = "EmployeeDetail" then
+            curdoc.FindSectionsID =""
+            curdoc.FindSections =""
+            curdoc.FindDivisionID =""
+            curdoc.FindDivision =""
+            curdoc.FindBranchID =""
+            curdoc.FindBranch =""
+            curdoc.FindLevelsID =""
+            curdoc.FindLevels =""
+            curdoc.FindPositionID =""
+            curdoc.FindPosition =""
+            curdoc.FindEmpID =""
+            curdoc.FindEmpFirstName =""
+            curdoc.FindEmpLastName =""
+
+        ElseIF Section = "CB" then
+
+            curdoc.FindEmployee = ""
+            curdoc.FindEmployeeID = ""
+            curdoc.FindEmployee_1 = ""
+            curdoc.GroupEmployeeDocID = ""
+            curdoc.EmpName = ""
+            curdoc.EmpCode = ""
+            curdoc.company = ""
+            curdoc.CompanyGroup = ""
+            curdoc.CompanyLines = ""
+            curdoc.Department = ""
+            curdoc.Sections = ""
+            curdoc.Division = ""
+            curdoc.Location = ""
+            curdoc.Position = ""
+            curdoc.Commander_1 = ""
+            curdoc.Commander_2 = ""
+
+            curdoc.EmpDestCompanyID = ""
+            curdoc.EmpDestCompany = ""
+            curdoc.EmpDestGroup = ""     
+            curdoc.EmpDestField = ""         
+            curdoc.EmpDestDepartmen = ""        
+            curdoc.EmpDestSections = ""          
+            curdoc.EmpDestDivision = ""           
+            curdoc.EmpDestBranch = ""           
+            curdoc.EmpDestLevels = ""         
+            curdoc.EmpDestPosition = ""
+            curdoc.EmpDestType = ""
+            curdoc.EmbDestSup_1 = ""
+            curdoc.EmbDestSup_2 = ""
+
+            curdoc.EmbCBDeductedPayroll = ""
+            curdoc.EmbCBChoice = ""
+            curdoc.EmbCBPayin = ""
+            curdoc.EmbCBDeducted = ""
+            curdoc.EmbNewSaraly = ""
+            curdoc.EmbOtherSaraly = ""
+            curdoc.EmbSaralyRemark = ""
+
+        End If
+
+
+End Sub

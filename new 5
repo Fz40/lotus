@@ -1,0 +1,18 @@
+BUWorker
+AgentCEOWorker
+ITTesterWorker
+MediaWorker
+AcademyWorker
+MediaWorker
+
+
+;[FailSilent]
+
+Rem : {
+Head := @DbLookup("Notes":"NoCache";Server:ThisDBName;"MasterDataBUByTypeBU";MainDocID;"BU";[FailSilent]);
+@Unique(@Name([CN];Creater : BUWorker:AgentCEOWorker:ITTesterWorker:MediaWorker:AcademyWorker))}
+
+
+sas
+
+Repeat
