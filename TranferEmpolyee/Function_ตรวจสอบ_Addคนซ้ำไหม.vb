@@ -5,7 +5,7 @@ Function checkAllEmployeeDup(collection As NotesDocumentCollection , MainDocID A
 	Dim s As New NotesSession
 	Dim db As NotesDatabase
 	Dim viewEmpGroupEmployee As NotesView
-	Dim colEmpGroupEmployee As NotesDocumentCollection
+	Dim colEmpGroupEmployee As NotesDocumentCollection 
 	
 	Set db = s.Currentdatabase
 	Set viewEmpGroupEmployee = db.Getview("AllEmbGroup")
